@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+      
+spring:
+  zipkin: 
+       base-url: http://localhost:9411/
+  security:
+      user:
+         name: admin
+         password: ganesha9
+  application:
+    name: OrderMyFood
+  cloud:
+    gateway:
+      routes:
+      - id: searchByNameId
+        uri: lb://searchByName
+        predicates:
+        - Path=/srchByName/** 
+      - id: searchByBudget
+        uri: lb://searchByBudget
+        predicates:
+        - Path=/srchBdgt/** 
+      - id: searchByItemName
+        uri: lb://searchByItemName
+        predicates:
+        - Path=/srchByItem/** 
+      - id: searchByLocName
+        uri: lb://searchByLocName
+        predicates:
+        - Path=/srchByLoc/** 
+      - id: searchByCousine
+        uri: lb://searchByCousine
+        predicates:
+        - Path=/srchByCousine/** 
+      - id: searchByDistance
+        uri: lb://searchByDistance
+        predicates:
+        - Path=/srchByDistance/** 
+      - id: addItemstoCart
+        uri: lb://addItemstoCart
+        predicates:
+        - Path=/addToCart     
+ 
